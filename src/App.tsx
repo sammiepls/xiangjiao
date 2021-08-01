@@ -1,5 +1,7 @@
 import React from "react";
 import Quiz from "./components/Quiz";
+import Form from "./components/Form";
+import Search from "./components/Search";
 import { ScoreProp } from "./types";
 import { generateQuiz, tallyScore } from "./util";
 
@@ -24,6 +26,8 @@ function App() {
 
   return (
     <div className="App">
+      <Search />
+      <Form />
       {quiz === null && <button onClick={handleStartQuiz}>Start quiz</button>}
       {quiz && !isQuizDone && (
         <Quiz quiz={quiz} handleQuizFinish={handleQuizFinish} />
