@@ -1,11 +1,11 @@
-import Dictionary from "./pages/Dictionary";
+import DictionaryPage from "./pages/DictionaryPage";
 import Form from "./components/Form";
-// import Quiz from "./components/Quiz";
+import QuizPage from "./pages/QuizPage";
 
 const Routes = {
-  "/": () => <Dictionary />,
+  "/": () => <DictionaryPage />,
   "/form": () => <Form />,
-  // "/quiz": () => <Quiz />,
+  "/quiz": () => <QuizPage />,
 };
 
 export default Routes;
