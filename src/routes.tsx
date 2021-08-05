@@ -1,10 +1,10 @@
 import DictionaryPage from "./pages/DictionaryPage";
-import Form from "./components/Form";
+import FormPage from "./pages/FormPage";
 import QuizPage from "./pages/QuizPage";
 
 const Routes = {
   "/": () => <DictionaryPage />,
-  "/form": () => <Form />,
+  "/form": () => <FormPage />,
   "/quiz": () => <QuizPage />,
 };
 

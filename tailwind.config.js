@@ -16,6 +16,22 @@ module.exports = {
       yellow: "#FDDE5E",
       darkYellow: "#E2D49B",
     },
+    animation: {
+      "move-up": "move-up 0.3s ease-in-out",
+      "move-down": "move-down 0.3s ease-in-out",
+    },
+    keyframes: {
+      "move-up": {
+        "0%": { transform: "translateY(10px)", opacity: 0 },
+        "80%": { transform: "translateY(-2px)", opacity: 0.9 },
+        "100%": { transform: "translateY(0)", opacity: 1 },
+      },
+      "move-down": {
+        "0%": { transform: "translateY(0)", opacity: 1 },
+        "80%": { transform: "translateY(2px)", opacity: 0.2 },
+        "100%": { transform: "translateY(10px)", opacity: 0 },
+      },
+    },
   },
   variants: {
     extend: {},

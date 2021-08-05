@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, ReactElement } from "react";
+import React, { useRef, ChangeEvent, FormEvent, ReactElement } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_WORD } from "../../Graphql/mutation";
 import { GET_ALL_WORDS_QUERY } from "../../Graphql/queries";
@@ -30,18 +30,59 @@ export default function Form({}: FormProps): ReactElement {
     createWord({ variables: { data: { cn, en } } });
   };
 
+  const [enFocused, setEnFocused] = React.useState(false);
+  const [cnFocused, setCnFocused] = React.useState(false);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Add a new entry</h1>
-      <label>
-        <h2>English</h2>
-        <input type="text" id="en" value={en} onChange={handleEn} />
+    <form
+      className="bg-white rounded-xl shadow-sm py-6 px-8 flex flex-col justify-center items-center"
+      onSubmit={handleSubmit}
+    >
+      <h1 className="text-xl mb-6">add to the dictionary</h1>
+
+      <label className="mb-8">
+        <h2
+          className={
+            enFocused ? "animate-move-up" : "animate-move-down opacity-0"
+          }
+        >
+          English
+        </h2>
+        <input
+          onFocus={() => setEnFocused(true)}
+          onBlur={() => setEnFocused(false)}
+          className="outline-none bg-transparent border-b border-darkYellow w-80 py-1"
+          type="text"
+          id="en"
+          value={en}
+          onChange={handleEn}
+          placeholder="english"
+        />
       </label>
-      <label>
-        <h2>Chinese pinyin</h2>
-        <input type="text" id="cn" value={cn} onChange={handleCn} />
+
+      <label className="mb-8">
+        <h2
+          className={
+            cnFocused ? "animate-move-up" : "animate-move-down opacity-0"
+          }
+        >
+          Chinese pinyin
+        </h2>
+        <input
+          onFocus={() => setCnFocused(true)}
+          onBlur={() => setCnFocused(false)}
+          className="outline-none bg-transparent border-b border-darkYellow w-80 py-1"
+          type="text"
+          id="cn"
+          value={cn}
+          onChange={handleCn}
+          placeholder="chinese pinyin"
+        />
       </label>
-      <button>Submit</button>
+      {loading && <p>Loading</p>}
+      <button className="bg-yellow py-2 px-8 rounded-full shadow-sm mb-4">
+        Submit
+      </button>
     </form>
   );
 }
