@@ -1,9 +1,13 @@
 import React, { ChangeEvent, FormEvent, ReactElement } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { CREATE_WORD } from "../../Graphql/mutation";
-import { GET_ALL_WORDS_QUERY } from "../../Graphql/queries";
+import { CREATE_WORD } from "../graphql/mutation";
+import { GET_ALL_WORDS_QUERY } from "../graphql/queries";
 
-export default function Form(): ReactElement {
+type FormProps = {
+  id?: number;
+};
+
+export default function Form({ id }: FormProps): ReactElement {
   const [createWord, { error, loading }] = useMutation(CREATE_WORD, {
     onCompleted: () => {
       setEn("");
@@ -25,6 +29,7 @@ export default function Form(): ReactElement {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
     createWord({ variables: { data: { cn, en } } });
   };
 
@@ -33,11 +38,9 @@ export default function Form(): ReactElement {
 
   return (
     <form
-      className="bg-white rounded-xl shadow-sm py-6 px-8 flex flex-col justify-center items-center"
       onSubmit={handleSubmit}
+      className="flex flex-col justify-center items-center"
     >
-      <h1 className="text-xl mb-6">add to the dictionary</h1>
-
       <label className="mb-8">
         <h2
           className={

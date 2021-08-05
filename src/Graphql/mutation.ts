@@ -7,3 +7,11 @@ export const CREATE_WORD = gql`
     }
   }
 `;
+
+export const UPDATE_WORD = gql`
+  mutation updateWord($id: ID!, $cn: String, $en: String) {
+    updateWord(id: $id, data: { cn: $cn, en: $en }) {
+      _id
+    }
+  }
+`;

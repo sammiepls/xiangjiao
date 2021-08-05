@@ -11,3 +11,12 @@ export const GET_ALL_WORDS_QUERY = gql`
     }
   }
 `;
+
+export const GET_WORD_BY_ID = gql`
+  query GetWordById($id: ID!) {
+    findWordByID(id: $id) {
+      en
+      cn
+    }
+  }
+`;
