@@ -22,7 +22,7 @@ export default function Word({ id, en, cn }: Props): ReactElement {
       <RenderModal>
         <div className="my-12 bg-white rounded-xl shadow-sm py-6 px-8 flex flex-col justify-center items-center">
           <h1 className="text-xl mb-6">edit word</h1>
-          <Form id={id} />
+          {/* <Form id={id} /> */}
         </div>
       </RenderModal>
     </article>

@@ -1,36 +1,34 @@
 import React, { ChangeEvent, FormEvent, ReactElement } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import { CREATE_WORD } from "../graphql/mutation";
-import { GET_ALL_WORDS_QUERY } from "../graphql/queries";
+import { ApolloError } from "@apollo/react-hooks";
+import { WordProp } from "../types";
 
 type FormProps = {
   id?: number;
+  onSubmit: (arg: Omit<WordProp, "_id">) => void;
+  error?: ApolloError;
+  loading?: boolean;
 };
 
-export default function Form({ id }: FormProps): ReactElement {
-  const [createWord, { error, loading }] = useMutation(CREATE_WORD, {
-    onCompleted: () => {
-      setEn("");
-      setCn("");
-    },
-    refetchQueries: [{ query: GET_ALL_WORDS_QUERY }],
-  });
-
+export default function Form({
+  id,
+  onSubmit,
+  error,
+  loading,
+}: FormProps): ReactElement {
   const [en, setEn] = React.useState("");
   const [cn, setCn] = React.useState("");
 
   const handleEn = (e: ChangeEvent<HTMLInputElement>) => {
-    setEn(e.target.value.trim());
+    setEn(e.target.value);
   };
 
   const handleCn = (e: ChangeEvent<HTMLInputElement>) => {
-    setCn(e.target.value.trim());
+    setCn(e.target.value);
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    createWord({ variables: { data: { cn, en } } });
+    onSubmit({ cn: cn.trim(), en: en.trim() });
   };
 
   const [enFocused, setEnFocused] = React.useState(false);
