@@ -1,6 +1,7 @@
 import React from "react";
 import { GET_ALL_WORDS_QUERY } from "../../Graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
+import Word from "../Word";
 
 interface Props {}
 
@@ -15,10 +16,10 @@ export default function WordList({}: Props): React.ReactElement {
   }
 
   return (
-    <ul>
+    <ul className="grid grid-cols-4">
       {data.allWords.data.map((word) => (
         <li key={word._id}>
-          {word.en} : {word.cn}
+          <Word en={word.en} cn={word.cn} />
         </li>
       ))}
     </ul>

@@ -1,5 +1,4 @@
 import React, { ChangeEvent, ReactElement } from "react";
-import data from "../../data.json";
 
 interface Props {}
 
@@ -11,21 +10,22 @@ export default function Search({}: Props): ReactElement {
     setQuery(event.target.value);
   };
 
-  React.useEffect(() => {
-    if (query !== "") {
-      setResults(data.filter((d) => d.en === query || d.cn === query));
-    }
-  }, [query]);
+  // React.useEffect(() => {
+  //   if (query !== "") {
+  //     setResults(data.filter((d) => d.en === query || d.cn === query));
+  //   }
+  // }, [query]);
 
   return (
-    <div>
-      <input type="search" value={query} onChange={handleInputChange} />
-      {results.map((r) => (
-        <article>
-          <p>{r.en}</p>
-          <p>{r.cn}</p>
-        </article>
-      ))}
+    <div className="flex flex-row justify-center mt-10 mb-10">
+      <input
+        className="outline-none bg-transparent border-b border-darkYellow w-80"
+        type="search"
+        value={query}
+        placeholder="search for a word"
+        onChange={handleInputChange}
+      />
+      <button className="text-3xl">🔍</button>
     </div>
   );
 }
