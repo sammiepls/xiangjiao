@@ -19,7 +19,12 @@ export default function Search({}: Props): ReactElement {
 
   return (
     <div>
-      <input type="search" value={query} onChange={handleInputChange} />
+      <input
+        className="w-100 outline-none bg-transparent border-b border-darkYellow w-3.5	shadow-lg"
+        type="search"
+        value={query}
+        onChange={handleInputChange}
+      />
       {results.map((r) => (
         <article>
           <p>{r.en}</p>
