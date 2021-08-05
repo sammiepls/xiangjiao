@@ -1,35 +1,26 @@
 import React from "react";
-import gql from "graphql-tag";
+import { GET_ALL_WORDS_QUERY } from "../../Graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
-
-const WORDS_QUERY = gql`
-  {
-    allWords {
-      data {
-        _id
-        cn
-        en
-      }
-    }
-  }
-`;
 
 interface Props {}
 
 export default function WordList({}: Props): React.ReactElement {
-  const { data, loading } = useQuery(WORDS_QUERY);
-  console.log(data);
+  const { data, loading, error } = useQuery(GET_ALL_WORDS_QUERY);
   if (loading) {
     return <div>Loading</div>;
-  } else {
-    return (
-      <ul>
-        {data.allWords.data.map((word) => (
-          <li key={word._id}>
-            {word.en} : {word.cn}
-          </li>
-        ))}
-      </ul>
-    );
   }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
+  return (
+    <ul>
+      {data.allWords.data.map((word) => (
+        <li key={word._id}>
+          {word.en} : {word.cn}
+        </li>
+      ))}
+    </ul>
+  );
 }
