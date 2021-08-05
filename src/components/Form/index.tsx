@@ -16,11 +16,11 @@ export default function Form(): ReactElement {
   const [cn, setCn] = React.useState("");
 
   const handleEn = (e: ChangeEvent<HTMLInputElement>) => {
-    setEn(e.target.value);
+    setEn(e.target.value.trim());
   };
 
   const handleCn = (e: ChangeEvent<HTMLInputElement>) => {
-    setCn(e.target.value);
+    setCn(e.target.value.trim());
   };
 
   const handleSubmit = (e: FormEvent) => {
