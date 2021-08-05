@@ -3,9 +3,7 @@ import { GET_ALL_WORDS_QUERY } from "../../Graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import Word from "../Word";
 
-interface Props {}
-
-export default function WordList({}: Props): React.ReactElement {
+export default function WordList(): React.ReactElement {
   const { data, loading, error } = useQuery(GET_ALL_WORDS_QUERY);
   if (loading) {
     return <div>Loading</div>;

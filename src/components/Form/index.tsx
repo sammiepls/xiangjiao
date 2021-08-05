@@ -1,11 +1,9 @@
-import React, { useRef, ChangeEvent, FormEvent, ReactElement } from "react";
+import React, { ChangeEvent, FormEvent, ReactElement } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_WORD } from "../../Graphql/mutation";
 import { GET_ALL_WORDS_QUERY } from "../../Graphql/queries";
 
-interface FormProps {}
-
-export default function Form({}: FormProps): ReactElement {
+export default function Form(): ReactElement {
   const [createWord, { error, loading }] = useMutation(CREATE_WORD, {
     onCompleted: () => {
       setEn("");
@@ -80,6 +78,7 @@ export default function Form({}: FormProps): ReactElement {
         />
       </label>
       {loading && <p>Loading</p>}
+      {error && <p>error</p>}
       <button className="bg-yellow py-2 px-8 rounded-full shadow-sm mb-4">
         Submit
       </button>

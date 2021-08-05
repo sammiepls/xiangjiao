@@ -1,9 +1,7 @@
 import React, { ChangeEvent, ReactElement } from "react";
 
-interface Props {}
-
-export default function Search({}: Props): ReactElement {
-  const [results, setResults] = React.useState([]);
+export default function Search(): ReactElement {
+  // const [results, setResults] = React.useState([]);
   const [query, setQuery] = React.useState("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
