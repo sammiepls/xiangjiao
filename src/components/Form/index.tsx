@@ -1,23 +1,17 @@
 import React, { ChangeEvent, FormEvent, ReactElement } from "react";
-import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
+import { CREATE_WORD } from "../../Graphql/mutation";
+import { GET_ALL_WORDS_QUERY } from "../../Graphql/queries";
 
 interface FormProps {}
 
 export default function Form({}: FormProps): ReactElement {
-  const CREATE_WORD = gql`
-    mutation CreateWord($data: WordInput!) {
-      createWord(data: $data) {
-        _id
-      }
-    }
-  `;
-
-  const [createWord, { loading }] = useMutation(CREATE_WORD, {
+  const [createWord, { error, loading }] = useMutation(CREATE_WORD, {
     onCompleted: () => {
       setEn("");
       setCn("");
     },
+    refetchQueries: [{ query: GET_ALL_WORDS_QUERY }],
   });
 
   const [en, setEn] = React.useState("");
