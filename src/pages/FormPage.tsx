@@ -2,13 +2,12 @@ import React, { ReactElement } from "react";
 import Form from "../components/Form";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_WORD } from "../graphql/mutation";
-import { GET_ALL_WORDS_QUERY } from "../graphql/queries";
+import { GET_WORDS } from "../graphql/queries";
 import { WordProp } from "../types";
+import { gql } from "@apollo/client";
 
 export default function FormPage(): ReactElement {
-  const [createWord, { error, loading }] = useMutation(CREATE_WORD, {
-    refetchQueries: [{ query: GET_ALL_WORDS_QUERY }],
-  });
+  const [createWord, { error, loading }] = useMutation(CREATE_WORD, {});
 
   const onSubmit = ({ en, cn }: Omit<WordProp, "_id">) => {
     createWord({ variables: { data: { cn, en } } });
