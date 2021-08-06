@@ -1,6 +1,6 @@
 import React from "react";
-import Quiz from "../components/Quiz";
-import { ScoreProp } from "../types";
+import Quiz from "components/Quiz";
+import { ScoreProp } from "types";
 import { generateQuiz, tallyScore } from "../util";
 
 const QuizPage = () => {

@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
-import { DataProp } from "../types";
+import { ReactElement } from "react";
+import { DataProp } from "types";
 
 type QuizProps = {
   answer: DataProp;

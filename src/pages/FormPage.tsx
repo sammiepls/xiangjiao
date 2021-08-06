@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react";
-import Form from "../components/Form";
+import { ReactElement } from "react";
+import Form from "components/Form";
 import { useMutation } from "@apollo/react-hooks";
-import { CREATE_WORD } from "../graphql/mutation";
-import { GET_WORDS } from "../graphql/queries";
-import { WordProp } from "../types";
+import { CREATE_WORD } from "graphql/mutation";
+import { GET_WORDS } from "graphql/queries";
+import { WordProp } from "types";
 
 export default function FormPage(): ReactElement {
   const [createWord, { error, loading }] = useMutation(CREATE_WORD, {

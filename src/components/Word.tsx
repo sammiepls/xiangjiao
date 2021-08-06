@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
-import { useModal } from "../hooks/useModal";
-import Form from "./Form";
+import { useModal } from "hooks/useModal";
+import Form from "components/Form";
 
-import { UPDATE_WORD } from "../graphql/mutation";
+import { UPDATE_WORD } from "graphql/mutation";
 import { useMutation } from "@apollo/client";
-import { WordProp } from "../types";
+import { WordProp } from "types";
 interface Props {
   id: number;
   en: string;

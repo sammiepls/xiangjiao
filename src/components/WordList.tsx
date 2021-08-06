@@ -1,7 +1,7 @@
 import React from "react";
-import { GET_WORDS } from "../graphql/queries";
+import { GET_WORDS } from "graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
-import Word from "./Word";
+import Word from "components/Word";
 
 export default function WordList(): React.ReactElement {
   const { data, loading, error } = useQuery(GET_WORDS);

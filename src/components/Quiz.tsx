@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
-import QuizAnswer from "./QuizAnswer";
-import { DataProp, ScoreProp } from "../types";
+import QuizAnswer from "components/QuizAnswer";
+import { DataProp, ScoreProp } from "types";
 
 interface Props {
   quiz: (DataProp & { answers: DataProp[] })[];
