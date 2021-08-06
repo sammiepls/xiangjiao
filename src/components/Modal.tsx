@@ -15,7 +15,7 @@ const Modal = React.memo(({ children, closeModal }: Props) => {
     <div className="h-screen w-screen bg-black bg-opacity-50 fixed z-50 flex justify-center items-center">
       <div className="p-6 flex flex-col">
         <button
-          className="bg-yellow rounded-full text-xl text-center w-8 h-8 justify-self-end self-end mb-2"
+          className="bg-yellow rounded-full text-xl text-center w-8 h-8 justify-self-end self-end "
           onClick={closeModal}
         >
           ✖️

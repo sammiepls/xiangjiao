@@ -9,7 +9,6 @@ export default function FormPage(): ReactElement {
   const [createWord, { error, loading }] = useMutation(CREATE_WORD, {
     update(cache, { data: { createWord } }) {
       const data: any = cache.readQuery({ query: GET_WORDS });
-      console.log("data", data);
       cache.writeQuery({
         query: GET_WORDS,
         data: {

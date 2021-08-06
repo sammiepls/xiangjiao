@@ -4,6 +4,10 @@ import { WordProp } from "../types";
 
 type FormProps = {
   id?: number;
+  word?: {
+    cn?: string;
+    en?: string;
+  };
   onSubmit: (arg: Omit<WordProp, "_id">) => void;
   error?: ApolloError;
   loading?: boolean;
@@ -11,12 +15,13 @@ type FormProps = {
 
 export default function Form({
   id,
+  word,
   onSubmit,
   error,
   loading,
 }: FormProps): ReactElement {
-  const [en, setEn] = React.useState("");
-  const [cn, setCn] = React.useState("");
+  const [en, setEn] = React.useState(word.en || "");
+  const [cn, setCn] = React.useState(word.cn || "");
 
   const handleEn = (e: ChangeEvent<HTMLInputElement>) => {
     setEn(e.target.value);
