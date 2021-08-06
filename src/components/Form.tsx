@@ -1,19 +1,27 @@
 import React, { ChangeEvent, FormEvent, ReactElement } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import { CREATE_WORD } from "../../Graphql/mutation";
-import { GET_ALL_WORDS_QUERY } from "../../Graphql/queries";
+import { ApolloError } from "@apollo/react-hooks";
+import { WordProp } from "../types";
 
-export default function Form(): ReactElement {
-  const [createWord, { error, loading }] = useMutation(CREATE_WORD, {
-    onCompleted: () => {
-      setEn("");
-      setCn("");
-    },
-    refetchQueries: [{ query: GET_ALL_WORDS_QUERY }],
-  });
+type FormProps = {
+  id?: number;
+  word?: {
+    cn?: string;
+    en?: string;
+  };
+  onSubmit: (arg: Omit<WordProp, "_id">) => void;
+  error?: ApolloError;
+  loading?: boolean;
+};
 
-  const [en, setEn] = React.useState("");
-  const [cn, setCn] = React.useState("");
+export default function Form({
+  id,
+  word,
+  onSubmit,
+  error,
+  loading,
+}: FormProps): ReactElement {
+  const [en, setEn] = React.useState(word.en || "");
+  const [cn, setCn] = React.useState(word.cn || "");
 
   const handleEn = (e: ChangeEvent<HTMLInputElement>) => {
     setEn(e.target.value);
@@ -25,7 +33,7 @@ export default function Form(): ReactElement {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    createWord({ variables: { data: { cn, en } } });
+    onSubmit({ cn: cn.trim(), en: en.trim() });
   };
 
   const [enFocused, setEnFocused] = React.useState(false);
@@ -33,11 +41,9 @@ export default function Form(): ReactElement {
 
   return (
     <form
-      className="bg-white rounded-xl shadow-sm py-6 px-8 flex flex-col justify-center items-center"
       onSubmit={handleSubmit}
+      className="flex flex-col justify-center items-center"
     >
-      <h1 className="text-xl mb-6">add to the dictionary</h1>
-
       <label className="mb-8">
         <h2
           className={

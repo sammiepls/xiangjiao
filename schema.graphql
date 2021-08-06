@@ -1,8 +1,8 @@
 type Word {
-  en: String
-  cn: String
+  en: String!
+  cn: String!
 }
 
 type Query {
-  allWords: [Word!]
+  words: [Word!]
 }
