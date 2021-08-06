@@ -3,7 +3,6 @@ import { useModal } from "../hooks/useModal";
 import Form from "./Form";
 
 import { UPDATE_WORD } from "../graphql/mutation";
-import { GET_WORDS } from "../graphql/queries";
 import { useMutation } from "@apollo/client";
 import { WordProp } from "../types";
 interface Props {
