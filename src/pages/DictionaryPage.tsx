@@ -3,7 +3,6 @@ import Search from "components/Search";
 import WordList from "components/WordList";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { GET_WORDS, GET_WORD_BY_CN, GET_WORD_BY_EN } from "graphql/queries";
-import { client } from "client";
 
 export default function Dictionary(): ReactElement {
   const [language, setLanguage] = useState<"en" | "cn">("en");
@@ -14,7 +13,7 @@ export default function Dictionary(): ReactElement {
     useLazyQuery(isEn ? GET_WORD_BY_EN : GET_WORD_BY_CN);
 
   let { words } = data || {};
-  const { before, after } = words || {};
+  const { after } = words || {};
 
   if (searchData) {
     words = searchData[isEn ? "wordsByEn" : "wordsByCn"];
