@@ -21,3 +21,27 @@ export const GET_WORD_BY_ID = gql`
     }
   }
 `;
+
+export const GET_WORD_BY_EN = gql`
+  query GetWordByEn($en: String!) {
+    wordsByEn(en: $en) {
+      data {
+        _id
+        en
+        cn
+      }
+    }
+  }
+`;
+
+export const GET_WORD_BY_CN = gql`
+  query GetWordByCn($cn: String!) {
+    wordsByCn(cn: $cn) {
+      data {
+        _id
+        en
+        cn
+      }
+    }
+  }
+`;
