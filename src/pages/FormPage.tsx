@@ -23,7 +23,7 @@ export default function FormPage(): ReactElement {
   };
 
   return (
-    <div className="my-12 bg-white rounded-xl shadow-sm py-6 px-8 flex flex-col justify-center md:items-center md:w-1/3 md:mx-auto">
+    <div className="my-12 bg-white rounded-xl shadow-sm py-6 px-8 flex flex-col justify-center md:items-center md:w-max md:mx-auto">
       <h1 className="text-xl mb-6">add to the dictionary</h1>
       <Form onSubmit={onSubmit} error={error} loading={loading} />
     </div>
