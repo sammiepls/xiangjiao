@@ -36,7 +36,6 @@ export default function Word({ id, en, cn }: Props): ReactElement {
         <div className="mt-2 bg-white rounded-xl shadow-sm py-6 px-8 flex flex-col justify-center items-center">
           <h1 className="text-xl mb-6">edit word</h1>
           <Form
-            id={id}
             word={word}
             onSubmit={onSubmit}
             error={error}

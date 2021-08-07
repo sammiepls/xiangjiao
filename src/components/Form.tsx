@@ -1,9 +1,9 @@
 import React, { ChangeEvent, FormEvent, ReactElement } from "react";
 import { ApolloError } from "@apollo/react-hooks";
 import { WordProp } from "../types";
+import Loader from "./Loader";
 
 type FormProps = {
-  id?: number;
   word?: {
     cn?: string;
     en?: string;
@@ -14,7 +14,6 @@ type FormProps = {
 };
 
 export default function Form({
-  id,
   word,
   onSubmit,
   error,
@@ -83,9 +82,12 @@ export default function Form({
           placeholder="chinese pinyin"
         />
       </label>
-      {loading && <p>Loading</p>}
+      {loading && <Loader />}
       {error && <p>error</p>}
-      <button className="bg-yellow py-2 px-8 rounded-full shadow-sm mb-4">
+      <button
+        className="bg-yellow py-2 px-8 rounded-full shadow-sm mb-4 disabled:opacity-50"
+        disabled={loading}
+      >
         Submit
       </button>
     </form>

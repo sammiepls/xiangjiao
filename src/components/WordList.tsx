@@ -1,5 +1,6 @@
 import React from "react";
 import Word from "components/Word";
+import Loader from "./Loader";
 
 export default function WordList({
   words,
@@ -7,7 +8,7 @@ export default function WordList({
   error,
 }): React.ReactElement {
   if (loading || !words) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   if (error) {
@@ -15,7 +16,7 @@ export default function WordList({
   }
 
   return (
-    <ul className="grid grid-cols-2 md:grid-cols-wordList overflow-auto justify-center">
+    <ul className="grid grid-cols-2 grid-c md:grid-cols-wordList overflow-auto justify-center">
       {words.data.map((word) => (
         <li key={word._id}>
           <Word en={word.en} cn={word.cn} id={word._id} />
