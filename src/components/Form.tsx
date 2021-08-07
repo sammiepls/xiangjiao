@@ -33,6 +33,10 @@ export default function Form({
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     onSubmit({ cn: cn.trim().toLowerCase(), en: en.trim().toLowerCase() });
+    if (!error) {
+      setEn("");
+      setCn("");
+    }
   };
 
   const [enFocused, setEnFocused] = React.useState(false);
