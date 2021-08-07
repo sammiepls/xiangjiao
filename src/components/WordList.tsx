@@ -15,7 +15,7 @@ export default function WordList({
   }
 
   return (
-    <ul className="grid grid-cols-4">
+    <ul className="grid grid-cols-2 md:grid-cols-wordList overflow-auto justify-center">
       {words.data.map((word) => (
         <li key={word._id}>
           <Word en={word.en} cn={word.cn} id={word._id} />

@@ -2,6 +2,11 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false,
   theme: {
+    extend: {
+      gridTemplateColumns: {
+        wordList: "repeat(4, minmax(min-content, 200px))",
+      },
+    },
     fontFamily: {
       sans: ['"Overpass Mono"'],
     },
@@ -33,6 +38,7 @@ module.exports = {
       },
     },
   },
+
   variants: {
     extend: {},
   },

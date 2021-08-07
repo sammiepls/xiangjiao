@@ -20,27 +20,29 @@ export default function Dictionary(): ReactElement {
   }
 
   return (
-    <div className="flex flex-col">
-      <Search onSearch={getSearchResults} />
-      <div className="mx-auto mt-2 mb-4">
-        <button
-          onClick={() => setLanguage("en")}
-          className={`p-2 rounded-full text-xs mr-2 ${
-            isEn ? "bg-yellow" : "bg-lightGray text-gray"
-          }`}
-        >
-          in english
-        </button>
-        <button
-          onClick={() => setLanguage("cn")}
-          className={`p-2 rounded-full text-xs mr-2 ${
-            !isEn ? "bg-yellow" : "bg-lightGray text-gray"
-          }`}
-        >
-          in chinese
-        </button>
+    <>
+      <div className="sticky top-12 z-50 bg-lightYellow pb-4">
+        <Search onSearch={getSearchResults} />
+        <div className="text-center mt-4">
+          <button
+            onClick={() => setLanguage("en")}
+            className={`p-2 rounded-full text-xs mr-2 ${
+              isEn ? "bg-yellow" : "bg-lightGray text-gray"
+            }`}
+          >
+            in english
+          </button>
+          <button
+            onClick={() => setLanguage("cn")}
+            className={`p-2 rounded-full text-xs mr-2 ${
+              !isEn ? "bg-yellow" : "bg-lightGray text-gray"
+            }`}
+          >
+            in chinese
+          </button>
+        </div>
       </div>
       <WordList words={words} loading={loading} error={error} />
-    </div>
+    </>
   );
 }
