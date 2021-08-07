@@ -32,7 +32,7 @@ export default function Form({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit({ cn: cn.trim(), en: en.trim() });
+    onSubmit({ cn: cn.trim().toLowerCase(), en: en.trim().toLowerCase() });
   };
 
   const [enFocused, setEnFocused] = React.useState(false);

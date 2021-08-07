@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement } from "react";
+import React, { ChangeEvent, FormEvent, ReactElement } from "react";
 
 export default function Search({ onSearch }): ReactElement {
   const [query, setQuery] = React.useState("");
@@ -7,8 +7,14 @@ export default function Search({ onSearch }): ReactElement {
     setQuery(event.target.value);
   };
 
-  const onSubmit = () => {
-    onSearch({ variables: { en: query, cn: query } });
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    onSearch({
+      variables: {
+        en: query.toLowerCase().trim(),
+        cn: query.toLowerCase().trim(),
+      },
+    });
   };
 
   return (
