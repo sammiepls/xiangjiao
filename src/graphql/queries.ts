@@ -1,13 +1,15 @@
 import { gql } from "@apollo/client";
 
 export const GET_WORDS = gql`
-  query GetWords {
-    words {
+  query GetWords($cursor: String) {
+    words(_cursor: $cursor) {
       data {
         _id
         en
         cn
       }
+      before
+      after
     }
   }
 `;
