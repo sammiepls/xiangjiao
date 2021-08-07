@@ -12,17 +12,17 @@ export default function Search({ onSearch }): ReactElement {
   };
 
   return (
-    <div className="flex flex-row justify-center mt-10">
+    <form onSubmit={onSubmit} className="flex flex-row justify-center mt-10">
       <input
-        className="outline-none bg-transparent border-b border-darkYellow w-80"
+        className="outline-none bg-transparent border-b border-darkYellow w-full md:w-80"
         type="search"
         value={query}
         placeholder="search for a word"
         onChange={handleInputChange}
       />
-      <button onClick={onSubmit} className="text-3xl">
+      <button type="submit" className="text-3xl">
         🔍
       </button>
-    </div>
+    </form>
   );
 }

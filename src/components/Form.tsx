@@ -20,8 +20,8 @@ export default function Form({
   error,
   loading,
 }: FormProps): ReactElement {
-  const [en, setEn] = React.useState(word.en || "");
-  const [cn, setCn] = React.useState(word.cn || "");
+  const [en, setEn] = React.useState(word?.en || "");
+  const [cn, setCn] = React.useState(word?.cn || "");
 
   const handleEn = (e: ChangeEvent<HTMLInputElement>) => {
     setEn(e.target.value);
@@ -44,7 +44,7 @@ export default function Form({
       onSubmit={handleSubmit}
       className="flex flex-col justify-center items-center"
     >
-      <label className="mb-8">
+      <label className="mb-8 self-stretch">
         <h2
           className={
             enFocused ? "animate-move-up" : "animate-move-down opacity-0"
@@ -55,7 +55,7 @@ export default function Form({
         <input
           onFocus={() => setEnFocused(true)}
           onBlur={() => setEnFocused(false)}
-          className="outline-none bg-transparent border-b border-darkYellow w-80 py-1"
+          className="outline-none bg-transparent border-b border-darkYellow md:w-80 w-full py-1"
           type="text"
           id="en"
           value={en}
@@ -64,7 +64,7 @@ export default function Form({
         />
       </label>
 
-      <label className="mb-8">
+      <label className="mb-8 self-stretch">
         <h2
           className={
             cnFocused ? "animate-move-up" : "animate-move-down opacity-0"
@@ -75,7 +75,7 @@ export default function Form({
         <input
           onFocus={() => setCnFocused(true)}
           onBlur={() => setCnFocused(false)}
-          className="outline-none bg-transparent border-b border-darkYellow w-80 py-1"
+          className="outline-none bg-transparent border-b border-darkYellow md:w-80 w-full py-1"
           type="text"
           id="cn"
           value={cn}

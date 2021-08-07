@@ -25,7 +25,7 @@ export default function Word({ id, en, cn }: Props): ReactElement {
   };
 
   return (
-    <article className="bg-white p-4 rounded-xl shadow-lg m-2 flex flex-col justify-center items-center h-40 w-60 text-center relative">
+    <article className="bg-white p-4 rounded-xl shadow-lg m-2 flex flex-col justify-center h-40 text-center relative">
       <h3 className="text-xl">{cn}</h3>
       <h4 className="text-md text-gray">{en}</h4>
       <button className="absolute top-4 right-4" onClick={show}>
