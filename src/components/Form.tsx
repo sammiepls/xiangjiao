@@ -2,6 +2,8 @@ import React, { ChangeEvent, FormEvent, ReactElement } from "react";
 import { ApolloError } from "@apollo/react-hooks";
 import { WordProp } from "../types";
 import Loader from "./Loader";
+import { useLazyQuery } from "@apollo/react-hooks";
+import { GET_WORD_BY_EN } from "graphql/queries";
 
 type FormProps = {
   word?: {
@@ -21,6 +23,41 @@ export default function Form({
 }: FormProps): ReactElement {
   const [en, setEn] = React.useState(word?.en || "");
   const [cn, setCn] = React.useState(word?.cn || "");
+  const [hasDuplicate, setHasDuplicate] = React.useState(false);
+
+  React.useEffect(() => {
+    if (hasDuplicate === true) {
+      setTimeout(() => {
+        setHasDuplicate(false);
+      }, 5000);
+    }
+  }, [hasDuplicate]);
+
+  const [getSearchResults] = useLazyQuery(GET_WORD_BY_EN, {
+    onCompleted: ({ wordsByEn: { data } }) => {
+      const matches = data.some((w) => w.en === en && w.cn === cn);
+      if (matches) {
+        setHasDuplicate(true);
+        return;
+      }
+      onSubmit({
+        cn: cn.trim().toLowerCase(),
+        en: en.trim().toLowerCase(),
+      });
+      if (!error) {
+        setEn("");
+        setCn("");
+      }
+    },
+  });
+
+  const checkForDuplicates = () => {
+    getSearchResults({
+      variables: {
+        en: en.toLowerCase().trim(),
+      },
+    });
+  };
 
   const handleEn = (e: ChangeEvent<HTMLInputElement>) => {
     setEn(e.target.value);
@@ -32,11 +69,7 @@ export default function Form({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit({ cn: cn.trim().toLowerCase(), en: en.trim().toLowerCase() });
-    if (!error) {
-      setEn("");
-      setCn("");
-    }
+    checkForDuplicates();
   };
 
   const [enFocused, setEnFocused] = React.useState(false);
@@ -88,6 +121,7 @@ export default function Form({
       </label>
       {loading && <Loader />}
       {error && <p>error</p>}
+      {hasDuplicate && <p>Word already exists in dictionary</p>}
       <button
         className="bg-yellow py-2 px-8 rounded-full shadow-sm mb-4 disabled:opacity-50"
         disabled={loading}
