@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="min-h-screen h-100 bg-lightYellow flex flex-col items-center p-6">
-      <header className="sticky top-0 bg-lightYellow z-40 w-full text-center">
+      <header className="sticky md:static top-0 bg-lightYellow z-40 w-full text-center">
         <h1
           className="text-4xl
         my-2 md:my-6"

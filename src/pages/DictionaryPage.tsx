@@ -21,7 +21,7 @@ export default function Dictionary(): ReactElement {
 
   return (
     <>
-      <div className="sticky top-12 z-40 bg-lightYellow pb-4">
+      <div className="sticky md:static top-12 z-40 bg-lightYellow pb-4">
         <Search onSearch={getSearchResults} />
         <div className="text-center mt-4">
           <button
