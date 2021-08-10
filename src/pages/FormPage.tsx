@@ -2,17 +2,29 @@ import { ReactElement } from "react";
 import Form from "components/Form";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_WORD } from "graphql/mutation";
-import { GET_WORDS } from "graphql/queries";
 import { WordProp } from "types";
+import gql from "graphql-tag";
 
 export default function FormPage(): ReactElement {
   const [createWord, { error, loading }] = useMutation(CREATE_WORD, {
     update(cache, { data: { createWord } }) {
-      const data: any = cache.readQuery({ query: GET_WORDS });
-      cache.writeQuery({
-        query: GET_WORDS,
-        data: {
-          words: [createWord, ...data.words.data],
+      cache.modify({
+        fields: {
+          words(existingWords = []) {
+            const newWordRef = cache.writeFragment({
+              data: createWord,
+              fragment: gql`
+                fragment NewWord on Word {
+                  en
+                  cn
+                }
+              `,
+            });
+            return {
+              ...existingWords,
+              data: [newWordRef, ...existingWords.data],
+            };
+          },
         },
       });
     },
