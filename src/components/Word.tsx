@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { useModal } from "hooks/useModal";
 import Form from "components/Form";
 
@@ -12,6 +12,7 @@ interface Props {
 }
 
 export default function Word({ id, en, cn }: Props): ReactElement {
+  const [front, setFront] = useState(true);
   const { show, RenderModal } = useModal();
   const word = {
     en,
@@ -24,13 +25,61 @@ export default function Word({ id, en, cn }: Props): ReactElement {
     updateWord({ variables: { id, data: { en, cn } } });
   };
 
+  const card = {
+    transform: "rotateY(0deg)",
+  };
+
+  const turn = {
+    transform: "rotateY(-180deg) ",
+  };
+
   return (
-    <article className="bg-white p-4 rounded-xl shadow-lg m-2 flex flex-col justify-center h-40 text-center relative">
-      <h3 className="text-xl">{cn}</h3>
-      <h4 className="text-md text-gray">{en}</h4>
-      <button className="absolute top-4 right-4" onClick={show}>
-        ✏️
-      </button>
+    <article
+      className="p-4 m-2 flex h-40 text-center  cursor-pointer
+      perspective relative transform transition duration-100 hover:-translate-y-2 ease-in-out
+      "
+    >
+      <div
+        style={front ? card : turn}
+        className="absolute left-0 right-0 top-0 bottom-0 duration-1000 flex transition w-full h-full bg-white rounded-xl shadow-lg hover:inch-up"
+        onClick={(e) => {
+          setFront(!front);
+        }}
+      >
+        <div
+          id="front"
+          className="absolute left-0 w-full h-full flex flex-col justify-center items-center backface-hidden transition duration-1000"
+          style={{
+            transform: front
+              ? "scaleX(1) rotateY(0deg)"
+              : "scaleX(-1) rotateY(180deg)",
+          }}
+        >
+          <h3 className="text-xl">{cn}</h3>
+          <h4 className="text-md text-gray">{en}</h4>
+        </div>
+        <div
+          id="back"
+          style={{
+            transform: front
+              ? "scaleX(1) rotateY(-180deg)"
+              : "scaleX(-1) rotateY(0deg)",
+          }}
+          className="absolute left-0 w-full h-full flex flex-col justify-center items-center backface-hidden transition duration-1000"
+        >
+          <button
+            className="mb-1"
+            onClick={(e) => {
+              e.stopPropagation();
+              show();
+            }}
+          >
+            edit ✏️
+          </button>
+          <button className="mb-1">delete 🗑</button>
+          <button>sentences 💬</button>
+        </div>
+      </div>
 
       <RenderModal>
         <div className="mt-2 bg-white rounded-xl shadow-sm py-6 px-8 flex flex-col justify-center items-center">
