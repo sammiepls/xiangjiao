@@ -15,8 +15,8 @@ export const GET_WORDS = gql`
 `;
 
 export const GET_WORD_BY_ID = gql`
-  query FindWordById {
-    findWordByID(id: "306158323758006848") {
+  query FindWordById($id: Int!) {
+    findWordByID(id: $id) {
       _id
       en
       cn

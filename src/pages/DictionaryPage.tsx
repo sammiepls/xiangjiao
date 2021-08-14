@@ -29,7 +29,7 @@ export default function Dictionary(): ReactElement {
 
   const filterWords = (query) => {
     setSearchResults(
-      words.data.filter((w) => w.en === query || w.cn === query)
+      words.data.filter((w) => w.en.includes(query) || w.cn.includes(query))
     );
   };
 

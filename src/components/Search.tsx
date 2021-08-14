@@ -18,6 +18,12 @@ export default function Search({ onSearch }): ReactElement {
     onSearch(query.toLowerCase().trim());
   };
 
+  React.useEffect(() => {
+    if (query) {
+      onSearch(query.toLowerCase().trim());
+    }
+  }, [query]);
+
   return (
     <form onSubmit={onSubmit} className="flex flex-row justify-center mt-10">
       <input
