@@ -9,12 +9,13 @@ export default function Search({ onSearch }): ReactElement {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSearch({
-      variables: {
-        en: query.toLowerCase().trim(),
-        cn: query.toLowerCase().trim(),
-      },
-    });
+    // onSearch({
+    //   variables: {
+    //     en: query.toLowerCase().trim(),
+    //     cn: query.toLowerCase().trim(),
+    //   },
+    // });
+    onSearch(query.toLowerCase().trim());
   };
 
   return (
