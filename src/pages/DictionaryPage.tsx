@@ -3,7 +3,8 @@ import Search from "components/Search";
 import WordList from "components/WordList";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { GET_WORDS, GET_WORD_BY_CN, GET_WORD_BY_EN } from "graphql/queries";
-import Loader from "../components/Loader";
+import Loader from "components/Loader";
+import Pagination from "components/Pagination";
 
 export default function Dictionary(): ReactElement {
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,17 +90,13 @@ export default function Dictionary(): ReactElement {
             error={error}
           />
 
-          <ol className="flex justify-center mt-6">
-            {Array.from({ length: pages }).map((_, i) => (
-              <li
-                className={`${
-                  i + 1 === currentPage ? "text-black" : "text-gray"
-                } mx-1`}
-              >
-                <button onClick={() => setCurrentPage(i + 1)}>{i + 1}</button>
-              </li>
-            ))}
-          </ol>
+          {!searchResults.length && (
+            <Pagination
+              pages={pages}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
+          )}
         </>
       )}
 
