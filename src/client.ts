@@ -9,7 +9,7 @@ const cache = new InMemoryCache({
           merge(existing = { data: [] }, incoming) {
             const mergedData = {
               ...incoming,
-              data: [...incoming.data, ...existing.data],
+              data: [...existing.data, ...incoming.data],
             };
             return mergedData;
           },

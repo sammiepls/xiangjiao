@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_WORDS = gql`
   query GetWords($cursor: String) {
-    words(_cursor: $cursor) {
+    words(_cursor: $cursor, _size: 40) {
       data {
         _id
         en
