@@ -1,6 +1,7 @@
 import React from "react";
 import Word from "components/Word";
 import Loader from "./Loader";
+import { WordProp } from "../types";
 
 export default function WordList({
   words,
@@ -17,7 +18,7 @@ export default function WordList({
 
   return (
     <ul className="grid grid-cols-2 grid-c md:grid-cols-wordList overflow-auto justify-center">
-      {words.map((word) => (
+      {words.map((word: WordProp) => (
         <li key={word._id}>
           <Word en={word.en} cn={word.cn} id={word._id} />
         </li>
