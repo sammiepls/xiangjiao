@@ -15,6 +15,7 @@ export default function Pagination({
     <ol className="flex justify-center mt-6">
       {Array.from({ length: pages }).map((_, i) => (
         <li
+          key={i}
           className={`${
             i + 1 === currentPage ? "text-black" : "text-gray"
           } mx-1`}
