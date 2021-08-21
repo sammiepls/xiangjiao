@@ -8,3 +8,11 @@
   -webkit-appearance: none;
   appearance: none;
 }
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.inch-up {
+  transform: translateY(10px);
+}

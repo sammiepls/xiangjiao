@@ -19,3 +19,11 @@ export const UPDATE_WORD = gql`
     }
   }
 `;
+
+export const DELETE_WORD = gql`
+  mutation deleteWord($id: ID!) {
+    deleteWord(id: $id) {
+      _id
+    }
+  }
+`;
