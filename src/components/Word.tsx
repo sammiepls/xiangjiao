@@ -1,8 +1,8 @@
-import { ReactElement, useState } from "react";
+import { ChangeEvent, MouseEventHandler, ReactElement, useState } from "react";
 import { useModal } from "hooks/useModal";
 import Form from "components/Form";
 
-import { UPDATE_WORD } from "graphql/mutation";
+import { UPDATE_WORD, DELETE_WORD } from "graphql/mutation";
 import { useMutation } from "@apollo/client";
 import { WordProp } from "types";
 interface Props {
@@ -21,8 +21,22 @@ export default function Word({ id, en, cn }: Props): ReactElement {
 
   const [updateWord, { error, loading }] = useMutation(UPDATE_WORD);
 
+  const [deleteWord, { error: deleteError, loading: deleteLoading }] =
+    useMutation(DELETE_WORD, {
+      update(cache) {
+        const normalizedId = cache.identify({ id, __typename: "Word" });
+        cache.evict({ id: normalizedId });
+        cache.gc();
+      },
+    });
+
   const onSubmit = ({ en, cn }: Omit<WordProp, "_id">) => {
     updateWord({ variables: { id, data: { en, cn } } });
+  };
+
+  const onDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    deleteWord({ variables: { id } });
   };
 
   const card = {
@@ -76,7 +90,9 @@ export default function Word({ id, en, cn }: Props): ReactElement {
           >
             edit ✏️
           </button>
-          <button className="mb-1">delete 🗑</button>
+          <button onClick={onDelete} className="mb-1">
+            delete 🗑
+          </button>
           <button>sentences 💬</button>
         </div>
       </div>
