@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
-import { DataProp } from "types";
+import { WordProp } from "types";
 
 type QuizProps = {
-  answer: DataProp;
+  answer: WordProp;
   checkAnswer: () => void;
 };
 
