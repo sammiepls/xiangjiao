@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
 import QuizAnswer from "components/QuizAnswer";
-import { DataProp, ScoreProp } from "types";
+import { WordProp, ScoreProp } from "types";
 
 interface Props {
-  quiz: (DataProp & { answers: DataProp[] })[];
+  quiz: (WordProp & { answers: WordProp[] })[];
   handleQuizFinish: (score: ScoreProp[]) => void;
 }
 
@@ -31,23 +31,24 @@ export default function Quiz({ quiz, handleQuizFinish }: Props): ReactElement {
 
   return (
     <div>
-      {quiz.map((d, i) =>
-        currentQuestion === i ? (
+      {quiz.map((d, i) => {
+        console.log(d);
+        return currentQuestion === i ? (
           <article>
             <h1>{d.cn}</h1>
             <ul>
               {d.answers.map((a, i) => (
-                <li key={a.id}>
+                <li key={a._id}>
                   <QuizAnswer
-                    checkAnswer={() => checkAnswer(d.id, a.id)}
+                    checkAnswer={() => checkAnswer(d._id, a._id)}
                     answer={a}
                   />
                 </li>
               ))}
             </ul>
           </article>
-        ) : null
-      )}
+        ) : null;
+      })}
     </div>
   );
 }

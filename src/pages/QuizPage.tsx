@@ -3,17 +3,32 @@ import Quiz from "components/Quiz";
 import { ScoreProp } from "types";
 import { generateQuiz, tallyScore } from "../util";
 
+import { useApolloClient } from "@apollo/client";
+import { GET_WORDS } from "graphql/queries";
+
 const QuizPage = () => {
   const [quiz, setQuiz] = React.useState(null);
   const [score, setScore] = React.useState(0);
   const [isQuizDone, setIsQuizDone] = React.useState(false);
   const [quizBreakdown, setQuizBreakdown] = React.useState<ScoreProp[]>(null);
 
+  const client = useApolloClient();
+
+  let words;
+
+  try {
+    words = client.readQuery({
+      query: GET_WORDS,
+    })?.words;
+  } catch (e) {
+    console.log("oopsies");
+  }
+
   const handleStartQuiz = () => {
     setScore(0);
     setIsQuizDone(false);
     setQuizBreakdown(null);
-    setQuiz(generateQuiz());
+    setQuiz(generateQuiz(words.data));
   };
 
   const handleQuizFinish = (quizScore: ScoreProp[]) => {
@@ -41,7 +56,7 @@ const QuizPage = () => {
                       Submitted answer:{" "}
                       {
                         quiz[i].answers.find(
-                          (a) => a.id === answer.submittedAnswer
+                          (a) => a._id === answer.submittedAnswer
                         ).en
                       }
                     </p>
@@ -54,7 +69,6 @@ const QuizPage = () => {
           <button onClick={handleStartQuiz}>Play again</button>
         </>
       )}
-      )
     </div>
   );
 };

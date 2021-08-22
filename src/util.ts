@@ -1,16 +1,17 @@
-import data from "./data.json";
+// import data from "./data.json";
 import { DataProp, ScoreProp } from "./types";
 
-export function generateRandomId(currentIds: number[]) {
-  let id = Math.floor(data.length * Math.random()) + 1;
+export function generateRandomId(currentIds: number[], data) {
+  let index = Math.floor(data.length * Math.random());
+  let id = data[index]._id;
   if (currentIds.includes(id)) {
-    id = generateRandomId(currentIds);
+    id = generateRandomId(currentIds, data);
   }
   return id;
 }
 
-export function getData(id: number) {
-  return data.find((d) => d.id === id);
+export function getData(id: number, data) {
+  return data.find((d) => d._id === id);
 }
 
 export function shuffleArray(array) {
@@ -21,21 +22,23 @@ export function shuffleArray(array) {
   return array;
 }
 
-export function generateAnswers(id: number): DataProp[] {
-  const answers = [getData(id)];
-  const ids = [id];
+export function generateAnswers(answer, data): DataProp[] {
+  const answers = [answer];
+  const answerIds = [answer._id];
 
   while (answers.length < 4) {
-    let randomId = generateRandomId(ids);
-    ids.push(randomId);
-    answers.push(getData(randomId));
+    let randomId = generateRandomId(answerIds, data);
+    answerIds.push(randomId);
+    answers.push(data.find((d) => d._id === randomId));
   }
   return shuffleArray(answers);
 }
 
-export function generateQuiz() {
-  return data.map((d) => {
-    const answers = generateAnswers(d.id);
+export function generateQuiz(data) {
+  const quiz = data.slice(0, 11);
+
+  return quiz.map((d) => {
+    const answers = generateAnswers(d, data);
     return {
       ...d,
       answers,
