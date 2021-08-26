@@ -27,3 +27,9 @@ export const DELETE_WORD = gql`
     }
   }
 `;
+
+export const LOGIN_USER = gql`
+  mutation loginUser($input: LoginUserInput) {
+    loginUser(input: $input)
+  }
+`;

@@ -43,7 +43,7 @@ export default function Dictionary(): ReactElement {
   }, [data, after, fetchMore]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && words) {
       setPages(Math.ceil(words.data.length / size));
     }
   }, [loading, size, words]);
