@@ -1,11 +1,12 @@
 import DictionaryPage from "./pages/DictionaryPage";
 import FormPage from "./pages/FormPage";
 import QuizPage from "./pages/QuizPage";
+import LoginPage from "./pages/LoginPage";
 
-const Routes = {
+const Routes = (isAuthenticated) => ({
   "/": () => <DictionaryPage />,
-  "/form": () => <FormPage />,
+  "/form": () => (isAuthenticated ? <FormPage /> : <LoginPage />),
   "/quiz": () => <QuizPage />,
-};
+});
 
 export default Routes;

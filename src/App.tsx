@@ -1,9 +1,13 @@
 import { useRoutes, A, usePath } from "hookrouter";
 import Routes from "./routes";
+import { useContext } from "react";
+import { AuthContext } from "context/AuthContext";
 
 function App() {
+  const { isAuthenticated } = useContext(AuthContext);
+
   const path = usePath();
-  const routeResult = useRoutes(Routes);
+  const routeResult = useRoutes(Routes(isAuthenticated));
 
   const isCurrentPath = (p: string) => p === path;
 
