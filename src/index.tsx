@@ -1,12 +1,14 @@
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { ApolloProvider } from "@apollo/client";
-import { client } from "./client";
+import { AuthProvider } from "context/AuthContext";
+import { AuthApolloProvider } from "context/AuthApolloContext";
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <AuthProvider>
+    <AuthApolloProvider>
+      <App />
+    </AuthApolloProvider>
+  </AuthProvider>,
   document.getElementById("root")
 );
