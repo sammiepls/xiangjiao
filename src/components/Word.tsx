@@ -50,7 +50,7 @@ export default function Word({ id, en, cn }: Props): ReactElement {
   return (
     <article
       className="p-4 m-2 flex h-40 text-center  cursor-pointer
-      perspective relative transform transition duration-100 hover:-translate-y-2 ease-in-out
+      perspective relative transform transition duration-100 hover:-translate-y-2 ease-in-out outline-none
       "
     >
       <div
