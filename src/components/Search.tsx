@@ -1,20 +1,22 @@
 import React, { ChangeEvent, FormEvent, ReactElement } from "react";
 
-export default function Search({ onSearch }): ReactElement {
-  const [query, setQuery] = React.useState("");
+type SearchProps = {
+  onSearch: (query: string) => void;
+  query: string;
+  setQuery: (query: string) => void;
+};
 
+export default function Search({
+  onSearch,
+  query,
+  setQuery,
+}: SearchProps): ReactElement {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // onSearch({
-    //   variables: {
-    //     en: query.toLowerCase().trim(),
-    //     cn: query.toLowerCase().trim(),
-    //   },
-    // });
     onSearch(query.toLowerCase().trim());
   };
 

@@ -9,6 +9,8 @@ import Pagination from "components/Pagination";
 export default function Dictionary(): ReactElement {
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
+  const [query, setQuery] = useState("");
+
   const size = 40;
 
   const [paginatedWords, setPaginatedWords] = useState([]);
@@ -47,23 +49,32 @@ export default function Dictionary(): ReactElement {
     }
   }, [currentPage, size, words]);
 
+  useEffect(() => {
+    if (query === "") {
+      setSearchResults([]);
+    }
+  }, [query]);
+
   return (
     <>
       <div className="sticky md:static top-12 z-40 bg-lightYellow pb-4">
-        <Search onSearch={filterWords} />
+        <Search onSearch={filterWords} query={query} setQuery={setQuery} />
       </div>
 
       {loading ? (
         <Loader />
+      ) : query && searchResults.length === 0 ? (
+        <p className="text-center text-red-400 mt-4 mb-6">
+          No results found 😢
+        </p>
       ) : (
         <>
           <WordList
-            words={searchResults.length ? searchResults : paginatedWords}
+            words={searchResults.length === 0 ? paginatedWords : searchResults}
             loading={loading}
             error={error}
           />
-
-          {!searchResults.length && (
+          {query === "" && (
             <Pagination
               pages={pages}
               setCurrentPage={setCurrentPage}
