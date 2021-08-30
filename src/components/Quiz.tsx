@@ -32,7 +32,6 @@ export default function Quiz({ quiz, handleQuizFinish }: Props): ReactElement {
   return (
     <div>
       {quiz.map((d, i) => {
-        console.log(d);
         return currentQuestion === i ? (
           <article className="flex flex-col justify-center items-center">
             <h1 className="text-xl">{d.cn}</h1>

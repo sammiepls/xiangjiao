@@ -16,19 +16,16 @@ const QuizPage = () => {
 
   let words;
 
-  try {
-    words = client.readQuery({
-      query: GET_WORDS,
-    })?.words;
-  } catch (e) {
-    console.log("oopsies");
-  }
-
   const handleStartQuiz = () => {
     setScore(0);
     setIsQuizDone(false);
     setQuizBreakdown(null);
-    setQuiz(generateQuiz(words.data));
+    try {
+      words = client.readQuery({
+        query: GET_WORDS,
+      })?.words;
+      setQuiz(generateQuiz(words.data));
+    } catch (e) {}
   };
 
   const handleQuizFinish = (quizScore: ScoreProp[]) => {
@@ -38,7 +35,7 @@ const QuizPage = () => {
   };
 
   return (
-    <div className="flex flex-column justify-center items-center mt-6">
+    <div className="flex flex-col justify-center items-center mt-6">
       {quiz === null && (
         <button
           className="bg-yellow py-2 px-8 rounded-full shadow-sm mb-4 disabled:opacity-50"
