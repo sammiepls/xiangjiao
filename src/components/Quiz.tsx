@@ -32,11 +32,10 @@ export default function Quiz({ quiz, handleQuizFinish }: Props): ReactElement {
   return (
     <div>
       {quiz.map((d, i) => {
-        console.log(d);
         return currentQuestion === i ? (
-          <article>
-            <h1>{d.cn}</h1>
-            <ul>
+          <article className="flex flex-col justify-center items-center">
+            <h1 className="text-xl">{d.cn}</h1>
+            <ul className="grid grid-cols-2 gap-x-5">
               {d.answers.map((a, i) => (
                 <li key={a._id}>
                   <QuizAnswer

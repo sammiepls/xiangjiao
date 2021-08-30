@@ -1,5 +1,6 @@
 // import data from "./data.json";
 import { DataProp, ScoreProp } from "./types";
+import sampleSize from "lodash/sampleSize";
 
 export function generateRandomId(currentIds: number[], data) {
   let index = Math.floor(data.length * Math.random());
@@ -35,7 +36,7 @@ export function generateAnswers(answer, data): DataProp[] {
 }
 
 export function generateQuiz(data) {
-  const quiz = data.slice(0, 11);
+  const quiz = sampleSize(data, 10);
 
   return quiz.map((d) => {
     const answers = generateAnswers(d, data);
