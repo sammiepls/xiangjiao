@@ -72,25 +72,14 @@ export default function Form({
     checkForDuplicates();
   };
 
-  const [enFocused, setEnFocused] = React.useState(false);
-  const [cnFocused, setCnFocused] = React.useState(false);
-
   return (
     <form
       onSubmit={handleSubmit}
       className="flex flex-col justify-center items-center"
     >
       <label className="mb-8 self-stretch">
-        <h2
-          className={
-            enFocused ? "animate-move-up" : "animate-move-down opacity-0"
-          }
-        >
-          English
-        </h2>
+        <h2>English</h2>
         <input
-          onFocus={() => setEnFocused(true)}
-          onBlur={() => setEnFocused(false)}
           className="outline-none bg-transparent border-b border-darkYellow md:w-80 w-full py-1"
           type="text"
           id="en"
@@ -101,16 +90,8 @@ export default function Form({
       </label>
 
       <label className="mb-8 self-stretch">
-        <h2
-          className={
-            cnFocused ? "animate-move-up" : "animate-move-down opacity-0"
-          }
-        >
-          Chinese pinyin
-        </h2>
+        <h2>Chinese pinyin</h2>
         <input
-          onFocus={() => setCnFocused(true)}
-          onBlur={() => setCnFocused(false)}
           className="outline-none bg-transparent border-b border-darkYellow md:w-80 w-full py-1"
           type="text"
           id="cn"
